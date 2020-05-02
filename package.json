@@ -1,6 +1,6 @@
 {
   "name": "rate-limit-ext",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "extended rate limit package for axios",
   "main": "src/index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "axios-rate-limit",
     "rate-limit-extended",
     "rate-limit-ext",
+    "axios",
     "rate",
     "limit",
     "ext"
@@ -26,6 +27,14 @@
     "axios": "*"
   },
   "type": "module",
-  "author": "metin.kun",
-  "license": "MIT"
+  "author": {
+    "name": "metin.kun",
+    "email": "kundakcioglum@gmail.com",
+    "url": "https://teamarga.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metinkun/rate-limit-ext.git"
+  }
 }

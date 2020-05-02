@@ -10,10 +10,8 @@ function RateLimitExt(
   let lasts = [];
 
   if (!reqPerSecond) {
-    if (reqLimit && period) {
-      _period = period;
-      _reqLimit = reqLimit;
-    } else throw new Error("check  options!!");
+    period && (_period = period);
+    reqLimit && (_reqLimit = reqLimit);
   } else {
     _reqLimit = reqPerSecond;
   }

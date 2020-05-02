@@ -35,7 +35,7 @@ const axiosRate1 = new RateLimitExt(axios.create(),{{ period: 777, reqLimit: 2 }
 // dont wait response of sended requests to trigger next requests on queue ,
 const axiosRate2 = new RateLimitExt(axios.create(),{{ period: 777, reqLimit: 2 , countBeforeReq : true }});
 
-//send max 20 request per  second , waits
+//send max 5 request per  second , waits
 const axiosRate3 = new RateLimitExt(axios.create(),{reqPerSecond: 5 });
 
 axiosRate1.get('https://argatechnology.com/'); // will perform immediately

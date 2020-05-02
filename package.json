@@ -1,0 +1,31 @@
+{
+  "name": "rate-limit-ext",
+  "version": "1.1.1",
+  "description": "extended rate limit package for axios",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "axios-balance",
+    "rate-limit",
+    "axios-rate-limit",
+    "rate-limit-extended",
+    "rate-limit-ext",
+    "rate",
+    "limit",
+    "ext"
+  ],
+  "files": [
+    "src/index.js"
+  ],
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "peerDependencies": {
+    "axios": "*"
+  },
+  "type": "module",
+  "author": "metin.kun",
+  "license": "MIT"
+}

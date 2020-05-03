@@ -1,4 +1,4 @@
-# axios-rate-limit
+# rate-limit-ext
 
 [![npm version](https://img.shields.io/npm/v/rate-limit-ext.svg?style=flat-square)](https://www.npmjs.com/package/axios-rate-limit)
 [![npm downloads](https://img.shields.io/npm/dt/rate-limit-ext.svg?style=flat-square)](https://www.npmjs.com/package/axios-rate-limit)

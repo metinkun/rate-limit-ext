@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/rate-limit-ext.svg?style=flat-square)](https://www.npmjs.com/package/axios-rate-limit)
 [![npm downloads](https://img.shields.io/npm/dt/rate-limit-ext.svg?style=flat-square)](https://www.npmjs.com/package/axios-rate-limit)
 
+[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
+
 <!-- [![Build Status](https://img.shields.io/travis/aishek/rate-limit-ext.svg?style=flat-square)](https://travis-ci.org/aishek/axios-rate-limit) -->
 
 Extended rate limit for axios: set how many requests per interval should perform immediately, other will be delayed automatically. Socket errors on long queues are fixed according to other axios-rate packages.
@@ -78,3 +80,6 @@ axiosRate3.getReqLimit(); // 2
 
 As [TeamArga](https://argatechnology.com/) , we have been developing javascript, python, c # projects since 2015.
 Feel free to contact
+
+[buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
+[buymeacoffee]: https://www.buymeacoffee.com/smashah

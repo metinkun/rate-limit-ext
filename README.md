@@ -61,9 +61,20 @@ axiosRate3.get("https://argatechnology.com/"); // will perform immediately
 axiosRate3.get("https://argatechnology.com/"); // will perform immediately
 axiosRate3.get("https://argatechnology.com/"); // will perform immediately
 axiosRate3.get("https://argatechnology.com/"); // will perform after 1000 milliseconds from one of first 5 requests RESPONSE
+
+// options hot-reloading also available
+axiosRate3.setPeriod(999); // sets period to 999 milliseconds
+axiosRate3.getPeriod(); // 999
+
+axiosRate3.setReqLimit(2); // sets request limit to 2
+axiosRate3.getReqLimit(); // 2
+
+axiosRate3.setRPS(3); // sets period to 1000 millisecond and request limit to 3
+axiosRate3.getPeriod(); // 1000
+axiosRate3.getReqLimit(); // 2
 ```
 
 ## A bit of advertising :-)
 
-As [TeamArga](https://teamarga.com/) , we have been developing javascript, python, c # projects since 2015.
+As [TeamArga](https://argatechnology.com/) , we have been developing javascript, python, c # projects since 2015.
 Feel free to contact

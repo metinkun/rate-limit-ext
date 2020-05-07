@@ -14,6 +14,7 @@ function RateLimitExt(
     reqLimit && (_reqLimit = reqLimit);
   } else {
     _reqLimit = reqPerSecond;
+    _period = 1000;
   }
 
   const sendNext = async () => {
@@ -107,6 +108,49 @@ function RateLimitExt(
   this.patch = function () {
     const props = { type: "patch", arguments };
     return handleReq(props);
+  };
+  /**
+   * get request rate per second
+   * @returns {Number} request rate per second
+   */
+  this.getRPS = function () {
+    return _reqLimit / (_period / 1000);
+  };
+  /**
+   * Set request limit for per second
+   * @param {Number} requestPerSecond The value to test
+   */
+  this.setRPS = function (requestPerSecond) {
+    _reqLimit = requestPerSecond;
+    _period = 1000;
+  };
+  /**
+   * Set period of rate calculation
+   * @param {Number} period period in milliseconds
+   */
+  this.setPeriod = function (period) {
+    _period = period;
+  };
+  /**
+   * Get period of rate calculation
+   * @returns {Number} period in milliseconds
+   */
+  this.getPeriod = function () {
+    return _period;
+  };
+  /**
+   * Set request limit for one period
+   * @param {Number} reqLimit request limit
+   */
+  this.setReqLimit = function (reqLimit) {
+    _reqLimit = reqLimit;
+  };
+  /**
+   * Get request limit for one period
+   * @returns {Number} request limit
+   */
+  this.getReqLimit = function () {
+    return _reqLimit;
   };
 }
 

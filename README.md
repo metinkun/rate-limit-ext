@@ -82,4 +82,4 @@ As [TeamArga](https://argatechnology.com/) , we have been developing javascript,
 Feel free to contact
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
-[buymeacoffee]: https://www.buymeacoffee.com/smashah
+[buymeacoffee]: https://www.buymeacoffee.com/metinkun

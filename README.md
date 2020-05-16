@@ -19,7 +19,7 @@ npm i rate-limit-ext
 
 ```javascript
 import axios from "axios";
-import RateLimitExt from "rate-limit-ext";
+import {RateLimitExt} from "rate-limit-ext";
 
 //const axiosRate1 = new RateLimitExt(axiosInstance,options);
 //available options : {

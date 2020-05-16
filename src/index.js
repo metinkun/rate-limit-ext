@@ -1,2 +1,4 @@
-export { RateLimitExt } from './rateLimitExt';
-export { RateLimitWeigth } from './rateLimitWeigth';
+const RateLimitExt = require('./rateLimitExt');
+const RateLimitWeigth = require('./rateLimitWeigth');
+
+module.exports = { RateLimitExt, RateLimitWeigth };

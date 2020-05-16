@@ -1,4 +1,4 @@
-export function RateLimitExt(
+function RateLimitExt(
   axios,
   { reqPerSecond, reqLimit, period, countBeforeReq }
 ) {
@@ -154,4 +154,4 @@ export function RateLimitExt(
   };
 }
 
-
+module.exports = RateLimitExt;

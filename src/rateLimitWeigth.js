@@ -1,4 +1,4 @@
-import myAxios from 'axios';
+const myAxios = require('axios').default;
 /**
  * Used by balance to get the balance data
  * @param {function} axios - axios instance not mandatory
@@ -8,13 +8,10 @@ import myAxios from 'axios';
  * @param {boolean} options.calculateBeforeResp - do rate calculations before responses
  * @return {object} - returns an axios instance with rate limitting
  */
-export function RateLimitWeigth(axios, options) {
+function RateLimitWeigth(axios, options) {
   // Weigth based rate limitter
-  const {
-    weigthLimit = 18,
-    period = 1000,
-    calculateBeforeResp = false,
-  } = options;
+  let { weigthLimit = 18, period = 1000, calculateBeforeResp = false } =
+    options || {};
   if (typeof axios === 'object' && axios !== null) {
     // accept options as a first parameter
     axios.weigthLimit && (weigthLimit = axios.weigthLimit);
@@ -46,12 +43,12 @@ export function RateLimitWeigth(axios, options) {
     if (!queue.length) return;
     const availableData = isAvailable(queue[0].weigth);
     if (availableData === 0) {
-      popNext();
-      await sendNext();
+      const next = popNext();
+      sendNext(next);
     } else if (availableData > 0) {
-      popNext();
+      const next = popNext();
       setTimeout(() => {
-        sendNext();
+        sendNext(next);
       }, availableData);
     }
   };
@@ -59,10 +56,11 @@ export function RateLimitWeigth(axios, options) {
     const lastObj = {
       millis: Date.now(),
       finished: false,
+      weigth: props.weigth,
     };
     lasts.push(lastObj);
     try {
-      const res = await _axios[props.type](...props.arguments);
+      const res = await _axios[props.type].apply(this, props.arguments);
       await onFinish(lastObj);
       return res;
     } catch (err) {
@@ -112,8 +110,9 @@ export function RateLimitWeigth(axios, options) {
     ));
   };
   const handleReq = (props) => {
-    props.weigth = props.arguments[0];
-    props.arguments = props.arguments.slice(1);
+    const args = [...props.arguments];
+    props.weigth = args[0];
+    props.arguments = args.slice(1);
 
     if (isAvailable(props.weigth) === 0) return sendReq(props);
     else {
@@ -127,6 +126,7 @@ export function RateLimitWeigth(axios, options) {
 
   this.get = function () {
     const props = { type: 'get', arguments };
+
     return handleReq(props);
   };
   this.post = function () {
@@ -178,3 +178,5 @@ export function RateLimitWeigth(axios, options) {
     return _weigthLimit;
   };
 }
+
+module.exports = RateLimitWeigth;

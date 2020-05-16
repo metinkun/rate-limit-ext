@@ -1,6 +1,6 @@
 {
   "name": "rate-limit-ext",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "extended rate limit package for axios",
   "main": "src/index.js",
   "scripts": {
@@ -18,13 +18,11 @@
     "ext"
   ],
   "dependencies": {
-    "axios": "^0.19.2",
-    "eslint": "^7.0.0"
+    "axios": "^0.19.2"
   },
   "peerDependencies": {
     "axios": "*"
   },
-  "type": "module",
   "author": {
     "name": "metin.kun",
     "email": "kundakcioglum@gmail.com",
@@ -34,5 +32,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/metinkun/rate-limit-ext.git"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0"
   }
 }

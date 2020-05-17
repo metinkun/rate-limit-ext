@@ -1,4 +1,4 @@
 const RateLimitExt = require('./rateLimitExt');
-const RateLimitWeigth = require('./rateLimitWeigth');
+const RateLimitWeight = require('./rateLimitWeight');
 
-module.exports = { RateLimitExt, RateLimitWeigth };
+module.exports = { RateLimitExt, RateLimitWeight };

@@ -3,25 +3,25 @@ const myAxios = require('axios').default;
  * Used by balance to get the balance data
  * @param {function} axios - axios instance not mandatory
  * @param {object} options - parameters
- * @param {number} options.weigthLimit - weigthlimit
+ * @param {number} options.weightLimit - weightlimit
  * @param {number} options.period - period in millisecond
  * @param {boolean} options.calculateBeforeResp - do rate calculations before responses
  * @return {object} - returns an axios instance with rate limitting
  */
-function RateLimitWeigth(axios, options) {
-  // Weigth based rate limitter
-  let { weigthLimit = 18, period = 1000, calculateBeforeResp = false } =
+function RateLimitWeight(axios, options) {
+  // Weight based rate limitter
+  let { weightLimit = 18, period = 1000, calculateBeforeResp = false } =
     options || {};
   if (typeof axios === 'object' && axios !== null) {
     // accept options as a first parameter
-    axios.weigthLimit && (weigthLimit = axios.weigthLimit);
-    axios.period && (weigthLimit = axios.period);
-    axios.countBeforeResp && (weigthLimit = axios.countBeforeResp);
+    axios.weightLimit && (weightLimit = axios.weightLimit);
+    axios.period && (weightLimit = axios.period);
+    axios.countBeforeResp && (weightLimit = axios.countBeforeResp);
     axios = myAxios.create();
   }
   let _period = period;
   let _countBeforeResp = calculateBeforeResp;
-  let _weigthLimit = weigthLimit;
+  let _weightLimit = weightLimit;
   let _axios = axios || myAxios.create();
   let queue = [];
   let lasts = [];
@@ -41,7 +41,7 @@ function RateLimitWeigth(axios, options) {
     lastObj.finished = true;
     lastObj.millis = Date.now();
     if (!queue.length) return;
-    const availableData = isAvailable(queue[0].weigth);
+    const availableData = isAvailable(queue[0].weight);
     if (availableData === 0) {
       const next = popNext();
       sendNext(next);
@@ -56,7 +56,7 @@ function RateLimitWeigth(axios, options) {
     const lastObj = {
       millis: Date.now(),
       finished: false,
-      weigth: props.weigth,
+      weight: props.weight,
     };
     lasts.push(lastObj);
     try {
@@ -68,28 +68,28 @@ function RateLimitWeigth(axios, options) {
       throw err;
     }
   };
-  const calcWeigths = (newWeigth) => {
+  const calcWeights = (newWeight) => {
     let availableOn = -2;
     let lastFinished = 0;
     let unFinisheds = 0;
     let total = 0;
     lasts.forEach((el) => {
-      if (!el.finished) unFinisheds += el.weigth;
+      if (!el.finished) unFinisheds += el.weight;
       else if (el.millis > lastFinished) lastFinished = el.millis;
-      total += el.weigth;
+      total += el.weight;
     });
 
-    if (total + newWeigth < _weigthLimit) availableOn = 0;
-    else if (unFinisheds + newWeigth >= _weigthLimit) {
+    if (total + newWeight < _weightLimit) availableOn = 0;
+    else if (unFinisheds + newWeight >= _weightLimit) {
       availableOn = -1;
     } else {
       let finisheds = lasts.filter((el) => el.finished);
       finisheds = lasts.sort((a, b) => b.millis - a.millis);
-      let weigths = 0;
+      let weights = 0;
       const len = finisheds.length;
       for (var a = 0; a < len; a++) {
-        weigths += finisheds[a].weigth;
-        if (total + newWeigth - weigths < _weigthLimit) {
+        weights += finisheds[a].weight;
+        if (total + newWeight - weights < _weightLimit) {
           availableOn = _period - (Date.now() - finisheds[a].millis);
           break;
         }
@@ -99,9 +99,9 @@ function RateLimitWeigth(axios, options) {
     return availableOn;
   };
 
-  const isAvailable = (newWeigth) => {
+  const isAvailable = (newWeight) => {
     updateLasts();
-    return calcWeigths(newWeigth);
+    return calcWeights(newWeight);
   };
   const updateLasts = () => {
     return (lasts = lasts.filter(
@@ -111,10 +111,10 @@ function RateLimitWeigth(axios, options) {
   };
   const handleReq = (props) => {
     const args = [...props.arguments];
-    props.weigth = args[0];
+    props.weight = args[0];
     props.arguments = args.slice(1);
 
-    if (isAvailable(props.weigth) === 0) return sendReq(props);
+    if (isAvailable(props.weight) === 0) return sendReq(props);
     else {
       return new Promise((resolve, reject) => {
         props.resolve = resolve;
@@ -164,19 +164,19 @@ function RateLimitWeigth(axios, options) {
     return _period;
   };
   /**
-   * Set weigth limit for each period
+   * Set weight limit for each period
    * @param {Number} reqLimit request limit
    */
-  this.setWeigthLimit = function (weigthLimit) {
-    _weigthLimit = weigthLimit;
+  this.setWeightLimit = function (weightLimit) {
+    _weightLimit = weightLimit;
   };
   /**
-   * Get weigth limit for each period
+   * Get weight limit for each period
    * @returns {Number} request limit
    */
-  this.getWeigthLimit = function () {
-    return _weigthLimit;
+  this.getWeightLimit = function () {
+    return _weightLimit;
   };
 }
 
-module.exports = RateLimitWeigth;
+module.exports = RateLimitWeight;
